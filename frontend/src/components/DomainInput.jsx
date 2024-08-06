@@ -28,7 +28,7 @@ function DomainInput() {
 
   return (
     <div className="container">
-      <div className="heading">Web Scraping</div>
+      <div className="heading"><center>Web Scraping</center></div>
       <form onSubmit={handleSubmit}>
         <input
           type="text"

@@ -8,7 +8,7 @@ function ProductList({ sitemapUrl }) {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.post('http://localhost:3000/api/fetch-products', { sitemapUrl });
+        const response = await axios.post('https://web-scraping-7xem.onrender.com/api/fetch-products', { sitemapUrl });
         setProducts(response.data);
       } catch (error) {
         console.error('Error fetching products:', error);
