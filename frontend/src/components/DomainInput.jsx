@@ -12,12 +12,12 @@ function DomainInput() {
     e.preventDefault();
     try {
       
-      const response = await axios.post("http://localhost:3000/api/pre-scrape", { domain });
+      const response = await axios.post("https://web-scraping-7xem.onrender.com/api/pre-scrape", { domain });
       setSitemapUrl(response.data.productSitemapUrl);
       setError("");
 
       
-      const productsResponse = await axios.post("http://localhost:3000/api/fetch-products", { sitemapUrl: response.data.productSitemapUrl });
+      const productsResponse = await axios.post("https://web-scraping-7xem.onrender.com/api/fetch-products", { sitemapUrl: response.data.productSitemapUrl });
       setProducts(productsResponse.data);
     } catch (err) {
       setError("Error fetching product sitemap URL or products");
