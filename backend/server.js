@@ -1,13 +1,13 @@
 const express = require('express');
 const axios = require('axios');
 const xml2js = require('xml2js');
-const cors = require('cors'); // Import cors
+const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
 const port = 3000;
 
-app.use(cors()); // Use cors middleware
+app.use(cors());
 app.use(express.json());
 
 // Endpoint to fetch product sitemap URL
@@ -48,6 +48,7 @@ app.post('/api/fetch-products', async (req, res) => {
     const response = await axios.get(sitemapUrl);
     const xml = response.data;
     const parser = new xml2js.Parser();
+
     parser.parseString(xml, (err, result) => {
       if (err) {
         return res.status(500).send('Failed to parse XML');
@@ -57,7 +58,7 @@ app.post('/api/fetch-products', async (req, res) => {
         return res.status(500).send('Invalid XML structure');
       }
 
-      const products = result.urlset.url.slice(0, 5).map((item) => ({
+      const products = result.urlset.url.map((item) => ({
         link: item.loc[0],
         image: item['image:image'] && item['image:image'][0]['image:loc'] ? item['image:image'][0]['image:loc'][0] : '',
         title: item['image:image'] && item['image:image'][0]['image:title'] ? item['image:image'][0]['image:title'][0] : 'No title',
